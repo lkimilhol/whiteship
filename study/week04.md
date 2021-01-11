@@ -1,0 +1,227 @@
+# week 04. 제어문
+
+### 4-1. 선택문
+
+선택문의 종류는 if, switch문이 있다.  
+if문을 먼저 살펴보도록 하자.
+
+if문은 문자대로 만약에~ 라는 의미를 가지고 있다.  
+코드를 보면 쉽게 이해가 될 것이다.
+
+```
+int a = 3;
+if (a > 2) {
+    System.out.println("true"); //a는 2보다 크기에 true가 출력된다.
+}
+```
+
+그렇다면 a > 2 조건이 참이 아니라면 어떻게 될까?  
+else 문을 추가하여 보자.
+
+```
+int a = 1;
+if (a > 2) {
+    System.out.println("true");
+} else {
+    System.out.println("false"); //a는 2보다 작기에 false가 출력된다.
+}
+```
+
+if의 조건을 여러개로 사용 가능하다. 바로 else if를 사용하면된다. 마찬가지로 예제를 보도록 하자.
+
+```
+int a = 4;
+if (a > 5) {
+    System.out.println("true");
+} else if (a > 3) {
+    System.out.println("else if"); //a > 3 의 조건을 만족시키기 때문에 else if가 출력
+}
+else {
+    System.out.println("false");
+}
+```
+else if가 출력 되는 것을 확인 할 수 있다.
+</br>
+</br>
+</br>
+</br>
+ 
+선택문의 다른 하나는 switch 이다. 다음 예제를 통해 알아보도록 하자.  
+
+```
+int a = 3;
+switch(a) {
+    case 1:
+        System.out.println(1);
+    case 2:
+        System.out.println(2);
+    case 3:
+        System.out.println(3);
+    case 4:
+        System.out.println(4);
+    case 5:
+        System.out.println(5);
+```
+
+위의 코드에서 출력 결과는 어떻게 될까? 바로  
+3  
+4  
+5  
+가 출력이 된다.
+
+switch문의 case 3: 을 보도록 하자.
+a의 값을 조건으로 걸어 두었고 (switch(a)) a가 3 이기 때문에 3부터 출력을 시작하였다. case는 a의 값이 1일 때는 case 1:이 실행되고 2일때는 case 2:가 실행된다.  
+case문의 3에 조건이 걸렸기 때문에 case 3: 의 구문을 실행하게 되었고, 그 아래에 있는 case 들이 실행 되었다.  
+이처럼 case문의 조건이 참이라면 아래의 case들이 모두 실행이 된다.  
+case문의 3만 출력을 하게 하려면 어떻게 해야할까?
+
+```
+int a = 10;
+switch(a) {
+    case 1:
+        System.out.println(1);
+    case 2:
+        System.out.println(2);
+    case 3:
+        System.out.println(3);
+        break;
+    case 4:
+        System.out.println(4);
+    case 5:
+        System.out.println(5);
+}
+```
+
+break; 문을 넣으므로써 출력이 3만 되는 것을 확인 할 수 있다.  
+그럼 a의 값을 한번 10으로 넣어보도록 하자. 결과는 어떻게 될까?  
+결과는 아무것도 출력되지 않는다. case문의 조건에 맞는것이 없기 때문이다. 그럼 조건이 아무것도 없을 경우의 처리를 추가 할 순 없을까?  
+default 문을 추가하여 보자.
+
+```
+int a = 10;
+switch(a) {
+    case 1:
+        System.out.println(1);
+    case 2:
+        System.out.println(2);
+    case 3:
+        System.out.println(3);
+        break;
+    case 4:
+        System.out.println(4);
+    case 5:
+        System.out.println(5);
+    default:
+        System.out.println(a); //10이 출력이 된다.
+}
+```
+
+default는 case 조건에 모두 해당되지 않을 경우에 실행되는 것으로 생각하면 편하다.
+switch문은 자바 버전에 따라 새로운 문법들이 가능하다. 다음은 다른 코드의 switch 문을 확인하여 보자.
+
+```
+int a = 3;
+switch(a) {
+    case 1 ->
+        System.out.println(1);
+    case 2 ->
+        System.out.println(2);
+    case 3 ->
+        System.out.println(3);
+    case 4 ->
+        System.out.println(4);
+    case 5 ->
+        System.out.println(5);
+    default ->
+        System.out.println(a);
+}
+```
+
+위의 swich 문의 결과는 어떻게될까? 결과는 바로 3이다. 추가로 4, 5도 출력되지 않는다.
+
+추가로 자바 13에서는 yield 키워드가 추가 되었다. yield는 switch 안에서의 return 이라고 생각 하면 쉽다. 예제를 살펴보도록 하자.
+
+```
+int a = 3;
+int b = switch(a) {
+    case 1 :
+        yield 1;
+    case 2 :
+        yield 2;
+    case 3 :
+        yield 3;
+    case 4 :
+        yield 4;
+    case 5 :
+        yield 5;
+    default :
+        yield -1;
+}
+```
+
+b의 값으로는 case 3: yield 3 코드가 실행되어 b의 값은 3이 된다.
+
+
+
+### 4-2. 반복문
+
+반복문에는 for 문 그리고 while 문이 있다. 차근히 살펴 보도록 하자.
+
+```
+for (int i = 0; i < 10; i++) {
+    System.out.println(i);
+}
+```
+
+위의 코드에서 출력의 결과는 어떻게 될까?  
+0  
+1  
+2  
+3    
+.  
+.  
+
+
+해당 코드는 0부터 9까지 출력을 해준다. 그럼 해당코드를 분석하여 보자.
+
+일단 for 문의 int i는 int형 변수 i를 선언한 것이다. 초기값을 주었다고 생각하면 된다. 그리고 나서 2번째 i < 10의 조건 부분을 보게 된다.  
+i는 0이고 (초기값이므로) 10보다 작으므로 해당 조건은 참이다. 그러면 스코프 안의 내용을 실행한다. 그리고 나서 마지막 단계인 i++ 을 실행하게 된다.
+
+그럼 i는 1이 되고 조건 검사는 그대로 i < 10 조건을 만족하기 때문에 스코프 영역을 계속 실행하게 된다. 이 실행은 i가 10이되어 조건을 만족하지 못할 때 까지 반복이 된다.
+즉 0~9까지 10번이 실행되는 것이다.
+
+
+다음은 while문을 봐보도록 하자.
+
+```
+int i = 0;
+while (i < 10) {
+    System.out.println(i);
+    i++;
+}
+```
+
+for문과 같은 결과는 출력하는 while 문이다. while 문은 조건이 while (조건식) 구조로 되어 있으며 해당 조건은 만족할시 계속해서 반복을 하는 반복문이다.  
+반복문을 탈출 시킬 수 있기 위해 조건을 변경하는 부분을 꼭 넣도록 하자.
+
+그렇다면 do while문은 어떤 반복문일까?
+
+```
+int i = 0;
+do {
+    System.out.println(i);
+    i++;
+} while (i < 0) ;
+```
+
+일단 i의 값은 0으로 초기화 하였다. 그리고 while 문의 조건식에 보면 i < 0 보다 작으면 이라는 조건을 걸어두었다.
+do while문 에서는 do내용은 무조건 실행이 된다.
+
+즉 0이 제일 처음 출력이 되고 i++가 되어 i는 1이 된다. 그리고 나서 while 반복문의 조건을 확인한다.  
+i < 0 보다 작지 않으므로 해당 반복문은 종료가 된다.
+
+이처럼 do while문의 경우 1번은 무조건 실행이 되는 부분이 while 반복문과 차이가 있다. while 반복문의 경우 초기값을 0으로 주고 while (i < 0) 의 조건을 만나게 된다면 이미 0은 0보다 작지 않기 때문에 반복문을 실행하지 않게 된다.
+
+
+### 4-3. 과제 0. JUnit 5 학습하세요.
+
