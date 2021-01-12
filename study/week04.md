@@ -248,3 +248,36 @@ public void testExec() {
 
 
 ### 4-4. 
+
+```
+ public void calculateParticipation() throws IOException {
+        GitHub github = new GitHubBuilder().withPassword("lkimilhol", "xxxx").build();
+        GHRepository ghRepository = github.getRepository("lkimilhol/whiteship");
+        List<GHIssue> issueList = ghRepository.getIssues(GHIssueState.ALL);
+
+        Map<String, Integer> userCount = new HashMap<>();
+
+        for (GHIssue issue : issueList) {
+            List<GHIssueComment> comments = issue.getComments();
+            for (GHIssueComment comment : comments) {
+                GHUser user = comment.getUser();
+                String name = user.getName();
+
+                if (userCount.containsKey(name)) {
+                    int cnt = userCount.get(name);
+                    userCount.put(name, ++cnt);
+                } else {
+                    userCount.put(name, 1);
+                }
+            }
+        }
+
+        userCount.forEach((k, v) -> {
+            double rate = Math.round(((double) v / issueList.size()) * 100) / 100.0;
+            System.out.println("name: " + k + " " + "participation rate: " + rate * 100);
+        });
+    }
+```
+
+간단하게 설명하자면 gitHub API를 참고 하였으며 issue는 레퍼지토리 내에 새로 생성하여 테스트 해보 았다. 테스트 결과는 내가 댓글을 달아놓은 이슈의 코멘트 수 만큼 제대로 카운팅이 되는것을 확인하였다.
+![13](./image/13.png)
