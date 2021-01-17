@@ -319,3 +319,33 @@ add 쪽 for loop가 조금 헷갈릴 수 있는데, 결국 마지막의 노드�
 중간에 remove 그리고 contains가 잘 구현되는것을 확인 해볼 수 있다.
 
 ![14](./image/14.png)
+
+
+### 4-6. 과제 3. Stack을 구현하세요.
+
+https://github.com/lkimilhol/whiteship/blob/master/src/main/java/dataStructure/Stack.java
+
+간단한 스택이다.
+
+push를 해서 사이즈를 넘어 갈 경우 error, 반대로 pop을 할 때 index가 0보다 작은 경우를 방지한다.
+
+```
+Stack stack = new Stack(5);
+stack.push(1);
+stack.push(2);
+stack.push(3);
+stack.push(4);
+stack.push(5);
+stack.push(5);
+
+System.out.println(stack.pop());
+System.out.println(stack.pop());
+System.out.println(stack.pop());
+System.out.println(stack.pop());
+System.out.println(stack.pop());
+System.out.println(stack.pop());
+```
+
+![15](./image/15.png)
+
+스택이기 때문에 pop 할 때 제일 마지막으로 넣은 원소부터 출력되는것을 볼 수 있다.
