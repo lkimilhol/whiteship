@@ -247,7 +247,7 @@ public void testExec() {
 ![12](./image/12.png)
 
 
-### 4-4. 
+### 4-4. 과제 1. live-study 대시 보드를 만드는 코드를 작성하세요.
 
 ```
  public void calculateParticipation() throws IOException {
@@ -281,3 +281,41 @@ public void testExec() {
 
 간단하게 설명하자면 gitHub API를 참고 하였으며 issue는 레퍼지토리 내에 새로 생성하여 테스트 해보 았다. 테스트 결과는 내가 댓글을 달아놓은 이슈의 코멘트 수 만큼 제대로 카운팅이 되는것을 확인하였다.
 ![13](./image/13.png)
+
+
+### 4-5. 과제 2. LinkedList를 구현하세요.
+
+https://github.com/lkimilhol/whiteship/blob/master/src/main/java/dataStructure/ListNode.java
+
+```
+    ListNode head = new ListNode();
+    head.setData(0);
+
+    ListNode listNode1 = new ListNode();
+    listNode1.setData(1);
+
+    ListNode listNode2 = new ListNode();
+    listNode2.setData(2);
+
+    ListNode listNode3 = new ListNode();
+    listNode3.setData(3);
+
+    head.add(head, listNode1, 1);
+    head.add(head, listNode2, 2);
+    head.add(head, listNode3, 2);
+    head.printList(head);
+    head.remove(head, 1);
+    System.out.println(head.contains(head, listNode3));
+    head.printList(head);
+```
+
+head를 기준으로 add가 되는 LinkedList를 구현하였다.
+
+add 쪽 for loop가 조금 헷갈릴 수 있는데, 결국 마지막의 노드까지 가보고 null 일 경우에는 마지막 노드에서 추가를 해주게 되는것이고,  
+그렇지 않다면 position - 1 에서 넣어 주어야 할 자리의 노드를 구하는 것을 알 수 있다.
+
+그리고 나서 그 노드의 next를 임시 노드에 담은뒤 연결을 해준다고 생각하면 된다.
+
+중간에 remove 그리고 contains가 잘 구현되는것을 확인 해볼 수 있다.
+
+![14](./image/14.png)
