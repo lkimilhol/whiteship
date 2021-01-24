@@ -349,3 +349,34 @@ System.out.println(stack.pop());
 ![15](./image/15.png)
 
 스택이기 때문에 pop 할 때 제일 마지막으로 넣은 원소부터 출력되는것을 볼 수 있다.
+
+### 4-7. 과제 4. 앞서 만든 ListNode를 사용해서 Stack을 구현하세요.
+
+https://github.com/lkimilhol/whiteship/blob/master/src/main/java/dataStructure/LinkedListStack.java
+
+스택을 LinkedList를 이용하여 구현하였다.
+
+```
+LinkedListStack stack = new LinkedListStack();
+ListNode head = new ListNode();
+head.setData(1);
+
+ListNode node1 = new ListNode();
+ListNode node2 = new ListNode();
+ListNode node3 = new ListNode();
+
+node1.setData(2);
+node2.setData(3);
+node3.setData(4);
+
+stack.push(head, node1);
+stack.push(head, node2);
+stack.push(head, node3);
+
+System.out.println(stack.pop(head));
+System.out.println(stack.pop(head));
+System.out.println(stack.pop(head));
+System.out.println(stack.pop(head));
+```
+
+![16](./image/16.png)
