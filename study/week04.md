@@ -386,6 +386,8 @@ System.out.println(stack.pop(head));
 
 https://github.com/lkimilhol/whiteship/blob/master/src/main/java/dataStructure/Queue.java
 
+https://github.com/lkimilhol/whiteship/blob/master/src/main/java/dataStructure/LinkedListQueue.java
+
 ```
 Queue queue = new Queue(5);
 queue.add(5);
@@ -403,9 +405,9 @@ queue.print();
 
 출력 결과를 봐보도록 하자.
 
-큐는 배열로 일단 구현하였고, 인덱스를 둬서 데이터의 개수를 체크할수 있도록 하였다.
-
 ![17](./image/17.png)
 
 먼저 들어온 숫자는 먼저 빠지게 되고 출력의 순서는 딱히 선입 선출을 가리지 않고 현재 내부 상태를 보여준다.
+
+배열로 구현한 큐나 링크드리스트로 구현한 큐 모두 동일한 출력을 보여준다.
 
