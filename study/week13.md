@@ -190,5 +190,44 @@ FileOutputStream fileOutputStream = new FileOutputStream("test.txt", true)
 
 ![45](./image/45.png)
 
-출력의 경우 BufferedWriter, PrintWriter 를 사용하여도 쓰기가 가능하다.
+<버퍼> 
 
+버퍼를 사용하면 FileWriter를 이용하는 것 보다 효율적인데, 이유는 버퍼에 데이터를 쌓아놓고 한번에 쓰기가 가능하기 때문이다.
+또한 버퍼를 사용하면 효율이 비교불가 급으로 높아진다고 한다.
+
+한번 테스트 해 보도록 하자.
+
+```
+public class Main {
+    public static void main(String[] args) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream("test.txt");
+             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("test1.txt", true));) {
+            String s = "\n한글도 됩니까?";
+
+            long start = System.currentTimeMillis();
+
+            for(int i = 0; i < 1000000; i++)
+                fileOutputStream.write(s.getBytes(StandardCharsets.UTF_8));
+
+            long end = System.currentTimeMillis();
+            System.out.println(end - start);
+
+            start = System.currentTimeMillis();
+
+            for(int i = 0; i < 1000000; i++)
+                bufferedWriter.write(s);
+
+            end = System.currentTimeMillis();
+            System.out.println(end - start);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+![47](./image/47.png)
+
+1000000번 파일의 쓰기를 테스트 했을때 BufferedWriter가 월등히 빠른 것을 알 수 있다. output의 연산이 많을 수록 두 방식의 차이는 더욱 크게 날 것이다.
