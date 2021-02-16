@@ -195,7 +195,7 @@ FileOutputStream fileOutputStream = new FileOutputStream("test.txt", true)
 버퍼를 사용하면 FileWriter를 이용하는 것 보다 효율적인데, 이유는 버퍼에 데이터를 쌓아놓고 한번에 쓰기가 가능하기 때문이다.
 또한 버퍼를 사용하면 효율이 비교불가 급으로 높아진다고 한다.
 
-한번 테스트 해 보도록 하자.
+버퍼의 쓰기를 한번 테스트 해 보도록 하자.
 
 ```
 public class Main {
@@ -231,3 +231,116 @@ public class Main {
 ![47](./image/47.png)
 
 1000000번 파일의 쓰기를 테스트 했을때 BufferedWriter가 월등히 빠른 것을 알 수 있다. output의 연산이 많을 수록 두 방식의 차이는 더욱 크게 날 것이다.
+
+다음은 버퍼의 읽기이다.
+
+```
+public class Main {
+    public static void main(String[] args) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("test.txt"))) {
+            while(bufferedReader.readLine() != null)
+                System.out.println(bufferedReader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+위의 예제는 bufferedReader를 활용한 파일 읽기이다. 파일 읽기는 라인 단위로 가능하며 빈 라인은 출력되지 않는다.
+
+
+<채널>
+
+채널은 IO 중에서 NIO (New Input Output) 패키지 속하는데 jdk 1.3 부터 생긴 패키지이며 자바의 IO의 속도 향상을 낼 수 있다.
+
+NIO는 채널 기반의 패키지 인데 채널은 스트림과 달리 입출력이 동시에 가능하고 기본적으로 버퍼를 사용해 읽은 데이터를 저장하여 사용하기에 입출력의 속도가 빠르다.
+
+이와 같은 개념으로 사용 되는 것이 셀렉터인데, 셀렉터는 여러개의 채널들 중 사용 가능한 채널을 선택하여 사용하는 것이다.
+자바 NIO의 셀렉터는 하나의 스레드에서 다중 입력 채널을 관리하며 이 멀티플렉싱 메커니즘을 사용하면 단일 스레드에서 여러 채널의 입출력을 쉽게 관리할 수 있다.
+(ex: 소켓 채널 관리)
+
+
+### 13-2. InputStream과 OutputStream
+
+java에서의 InputStream, OutputStream은 바이트 단위 입출력의 최상위 클래스이다.
+
+하위 클래스로는 
+
+>FileInputStream / FileOutputStream  
+>DataInputStream / DataOutputStream  
+>ObjectInputStream / ObjectOutputStream  
+>BufferedInputStream / BufferedOutputStream  
+>PrintStream
+ 
+가 있다. 모든 바이트 기반의 스트림은 InputStream, OutputStream 클래스를 상속받아 구현된다.
+
+* FileInputStream / FileOutputStream
+
+    ```
+    File file = new File("test.txt");
+    input = new FileInputStream(file);
+    ```
+  파일로 부터 바이트로 입력받아, 바이트 단위로 출력할 수 있는 클래스
+  
+
+* DataInputStream / DataOutputStream
+
+    데이터 입력 스트림에의해 primitive type의 Java 데이터를 읽고 쓸 수 있다.
+    
+    ```
+    fis = new FileInputStream("StreamFile.out");
+    dis = new DataInputStream(fis);
+                
+    /*
+    boolean readBoolean() throws IOException
+    byte readByte() throws IOException 
+    char readChar() throws IOException 
+    double readDouble throws IOException 
+    float readFloat() throws IOException 
+    long readLong() throws IOException 
+    short readShort() throws IOException 
+    int readInt() throws IOException
+    */
+    ```
+  때문에 클래스의 메소드 또한 각 primitive type의 자료를 읽는 메소드들이 있다.
+
+
+* ObjectInputStream / ObjectOutputStream  
+    오브젝트의 직렬화에 대한 스트림. 각각의 생성자들도 마샬/언마샬링을 위한 생성자이다.  
+    ObjectInputStream(InputStream in): in 으로부터의 언마샬링  
+    ObjectOutputStream(OutputStream out): out 으로 부터 마샬링
+  
+    해당 클래스를 사용하기 위해서는 Object의 클래스가 serializable 인터페이스를 구현해야 한다.
+
+    ![48](./image/48.png)
+  
+
+* BufferedInputStream / BufferedOutputStream  
+    해당 스트림은 *바이트 기반의 성능 향상 보조 스트림*이고 stream의 방식을 버퍼로 활용하여 속도 향상을 극적으로 올렸다.
+    ```
+    input = new BufferedInputStream(new FileInputStream("test.txt"));
+    ```
+  
+* PrintStream
+  PrintStream은 데이터를 기반스트림에 다양한 형태로 출력할수있는 메소드를 제공한다. 우리가 알고 있는 System.out 이 PrintStream 의 객체이다.
+
+  ![49](./image/49.png)
+
+    또한 파일의 쓰기도 가능하다.
+
+  ```
+  public class Main {
+        public static void main(String[] args) throws IOException {
+            String destination = "test.txt";
+    
+            try(PrintStream ps = new PrintStream(destination)){
+                ps.println("I love Java!");
+                ps.flush();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+  ```
+
+    ![50](./image/50.png)
