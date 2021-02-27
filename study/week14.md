@@ -197,6 +197,14 @@ public class Main {
 
 type를 보면 Integer, Double, String 이 출력 되는 것을 볼 수 있다.
 
+제네릭 타입은 꼭 T를 써야 하는 건 아니지만 아래의 규칙을 지켜주면 좋다.
+
+> E: 요소  
+> K: 키  
+> T: 타입  
+> N: 숫자  
+> V: 값  
+
 ### 14-2. 제네릭 주요 개념 (바운디드 타입, 와일드 카드)
 
 바운디드 타입에서 **바운디드란 타입**을 제한한다는 의미이다.
@@ -286,4 +294,83 @@ public class Main {
 만약 제네릭 클래스를 사용할때 따로 bound 되지 않았다면 type erasure에 의해 T -> Object로 변환되어 바이트 코드를 생성하게 된다.
 
 만약 <T extends Test>로 타입을 바운드 하였다면 바이트 코드에서는 Test로 치환이 된다.
+
+```
+public class Stack<E> {
+    private E[] stackContent;
+
+    public Stack(int capacity) {
+        this.stackContent = (E[]) new Object[capacity];
+    }
+
+    public void push(E data) {
+        // ..
+    }
+
+    public E pop() {
+        // ..
+    }
+}
+```
+
+위의 Stack 클래스는 제네릭 타입이다. 이를 컴파일러가 바이트 코드로 변환 시킨다면 바운드 되지 않았기 때문에 아래와 같이 Object 타입으로 변환이 된다.
+
+```
+public class Stack {
+    private Object[] stackContent;
+
+    public Stack(int capacity) {
+        this.stackContent = (Object[]) new Object[capacity];
+    }
+
+    public void push(Object data) {
+        // ..
+    }
+
+    public Object pop() {
+        // ..
+    }
+}
+```
+
+아래는 Bound 된 클래스이다. 이 결과를 보도록 하자.
+
+```
+public class BoundStack<E extends Comparable<E>> {
+    private E[] stackContent;
+
+    public BoundStack(int capacity) {
+        this.stackContent = (E[]) new Object[capacity];
+    }
+
+    public void push(E data) {
+        // ..
+    }
+
+    public E pop() {
+        // ..
+    }
+}
+```
+
+```
+public class BoundStack {
+    private Comparable [] stackContent;
+
+    public BoundStack(int capacity) {
+        this.stackContent = (Comparable[]) new Object[capacity];
+    }
+
+    public void push(Comparable data) {
+        // ..
+    }
+
+    public Comparable pop() {
+        // ..
+    }
+}
+
+```
+Comparable 타입을 바운드 하였고 컴파일러가 바이트 코드로 만들어 낼 때는 위와 같이 Comparable로 type erasure가 일어난 것을 볼 수 있다.
+
 
