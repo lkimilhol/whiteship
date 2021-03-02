@@ -92,6 +92,79 @@ f도 틀린 문법이 아니지만 람다식을 확인하기 위해 f2를 예시
 
 그렇다면 함수형 인터페이스는 왜 만들어졌을까? 
 
+자바에서 함수형 인터페이스는 람다식의 접근을 위함이며 람다식이 함수형 인터페이스로 구현되어 있기 때문이다.
+
+함수형 인터페이스를 통해 함수형 프로그래밍 또한 가능하게 되었다고 생각하며 이는 아래에서 좀 더 다뤄 보도록 하자.
+
+자바에서 기본적으로 제공하는 함수형 인터페이스는 다음과 같다.
+
+>* Supplier  
+>* Consumer  
+>* Function<T, R>  
+>* Predicate  
+
+하나하나 살펴 보도록 하자.
+
+* Supplier  
+   인자를 받지 않고 리턴만 해 준다.
+
+   ![69](./image/69.png)  
+
+  ```
+     public class Main {
+       public static void main(String[] args) {
+           Supplier<String> s = () -> "hi"; 
+           System.out.println(s.get()); //hi 출력
+       }
+   }
+  ```
+  
+* Consumer
+   인자를 받고 아무것도 리턴하지 않는다.
+
+  ![70](./image/70.png)
+
+  ```
+     public class Main {
+       public static void main(String[] args) {
+           Consumer<String> printString = arg -> System.out.println("hi " + arg);
+           printString.accept("test"); //hi test 출력
+       }
+   }
+  ```
+  
+* Function<T, R>
+   T타입의 인자를 받고 R타입으로 리턴한다.
+
+  ![71](./image/71.png)
+  
+   ```
+     public class Main {
+       public static void main(String[] args) {
+           Function<Integer, Double> f = (v) -> v * 2.0;
+           System.out.println(f.apply(3)); //6.0 출력
+       }
+   }
+  ```
+  
+* Predicate
+   인자를 받고 boolean 리턴
+  ![72](./image/72.png)  
+  (함수들이 더 있지만 길어서 생략한다)
+  ```
+     public class Main {
+       public static void main(String[] args) {
+           Predicate<Integer> p = (v) -> 3 > v;
+           System.out.println(p.test(22)); //false 출력
+       }
+   }
+  ```
+
+이처럼 자바에서 제공하는 기본적인 함수형 인터페이스를 통하여 람다식을 구현 할 수 있다.
+
+하지만 이는 기본적으로 제공하는 자바의 함수형 인터페이스이며 우리는 이와 비슷하게 함수형 인터페이스를 구현하고 람다식으로 구현이 가능하다.
+
+
 함수형 인터페이스를 통해 우리는 함수를 1급 시민으로 처리가 가능하며 이는 함수를 하나의 값으로 취급하여 함수형 프로그래밍의 패러다임에 접근하는 것이라고 생각한다.
 
 때문에 이는 java로 함수형 프로그래밍이 가능하다는 것이 가장 큰 특징이 아닐까?
@@ -112,7 +185,11 @@ f도 틀린 문법이 아니지만 람다식을 확인하기 위해 f2를 예시
 
 고차함수란 함수에 함수를 전달하여 만든 새로운 함수를 뜻하며 이를 통해 프로그램을 더욱 간결하게 작성이 가능하다. 
 
-지연 연산이란 어떤 값이 실제로 쓰이기 전까지는 연산을 하지 않고 필요할 때 연산을 하는 방식이다. java를 통해 위에서 언급한 패러다임을들 적용 할 수 있을까?
+지연 연산이란 어떤 값이 실제로 쓰이기 전까지는 연산을 하지 않고 필요할 때 연산을 하는 방식이다. 
+
+java를 통해 위에서 언급한 패러다임을들 적용 할 수 있을지 한번 또 고민해 보도록 하자.
+
+
 
 
 
