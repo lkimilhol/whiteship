@@ -108,7 +108,7 @@ f도 틀린 문법이 아니지만 람다식을 확인하기 위해 f2를 예시
 * Supplier  
    인자를 받지 않고 리턴만 해 준다.
 
-   ![69](./image/69.png)  
+   ![69](./image/69.png)    
 
   ```
      public class Main {
@@ -120,9 +120,9 @@ f도 틀린 문법이 아니지만 람다식을 확인하기 위해 f2를 예시
   ```
   
 * Consumer
-   인자를 받고 아무것도 리턴하지 않는다.
+   인자를 받고 아무것도 리턴하지 않는다.  
 
-  ![70](./image/70.png)
+  ![70](./image/70.png)  
 
   ```
      public class Main {
@@ -134,9 +134,9 @@ f도 틀린 문법이 아니지만 람다식을 확인하기 위해 f2를 예시
   ```
   
 * Function<T, R>
-   T타입의 인자를 받고 R타입으로 리턴한다.
+   T타입의 인자를 받고 R타입으로 리턴한다.  
 
-  ![71](./image/71.png)
+  ![71](./image/71.png)  
   
    ```
      public class Main {
@@ -148,8 +148,9 @@ f도 틀린 문법이 아니지만 람다식을 확인하기 위해 f2를 예시
   ```
   
 * Predicate
-   인자를 받고 boolean 리턴
-  ![72](./image/72.png)  
+   인자를 받고 boolean 리턴  
+  
+  ![72](./image/72.png)   
   (함수들이 더 있지만 길어서 생략한다)
   ```
      public class Main {
@@ -222,6 +223,132 @@ effectively final 이란 초기화 된 이후에 값이 한번도 변경되지 �
 
 이렇게 람다에서 외부 지역변수를 참조 하는 행위를 **Lambda Capturing** 이라고 부른다.
 
+
+### 15-4. 메소드, 생성자 레퍼런스
+
+우리는 앞서 익명 클래스를 통한 람다식의 표현을 보았다.
+
+익명클래스를 만들고 사용 할 수도 있지만 이미 만들어져 있는 익명 클래스를 사용하는 방법이 있는데 이를 메소드 참조라고 한다.
+
+예를 들어보도록 하자.
+
+```
+public class Main {
+    public static void main(String[] args) {
+        int[] a = {1, 2, 3, 4, 5};
+
+        Arrays.stream(a).forEach(x -> System.out.println(x));
+    }
+}
+```
+
+![75](./image/75.png)
+
+위 예제는 foreach로 배열 a를 출력하는 것이다.  
+우리는 여기서 람다식 문법을 확인 할 수 있다. 그렇다면 이 문법을 어떻게 메소드 참조로 바꾼다는 걸까?
+
+```
+public class Main {
+    public static void main(String[] args) {
+        int[] a = {1, 2, 3, 4, 5};
+
+        Arrays.stream(a).forEach(System.out::println);
+    }
+}
+```
+위의 식에서 좀 더 간결하게 System.out::println 이라는 문법으로 같은 결과를 출력 할 수 있다.
+
+![75](./image/75.png)
+
+이처럼 클래스의 이름과 :: 메소드를 분리시켜 표현하게 되며 아래 정리 된 내용은 메소드 레퍼런스를 사용하는 방식이다.
+
+위의 println의 식의 경우 객체를 생성하진 않았지만 인스턴스 메소드를 호출 한 것으로 생각 할 수 있다.
+
+
+>클래스::인스턴스메소드 
+>클래스::정적메소드  
+>~~특정객체::인스턴스메소드 (잘 사용하지 않는다)~~
+
+다음은 리스트에서 가장 큰 값을 출력하는 예제이다.
+
+```
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> s = new ArrayList<>();
+
+        s.add(1);
+        s.add(999);
+        s.add(2);
+
+        Optional<Integer> value = s.stream().reduce(Math::max);
+        value.ifPresent(System.out::println); //999 출력
+    }
+}
+```
+
+Optional<Integer>의 의미는 null 값일 수 없다는 의미로 생각하자.
+
+Math::max는 정적 메소드의 예제가 된다.
+
+실제로 Math 클래스의 max 메소드를 참고해 보도록 하자.
+
+![76](./image/76.png)
+
+메소드가 static, 정적 메소드로 선언 된 것을 확인 할 수 있다.
+
+그렇다면 생성자 메소드 참조란 무엇일까?
+
+클래스를 생성 할 때 우리는 생성자를 호출하게 되며, 
+
+클래스::new 라는 문법을 사용하여 매개변수에 맞는 생성자를 호출하는 방식이다.
+
+다음 예제를 보도록 하자.
+
+```
+class Test {
+    Test() {
+        System.out.println("new");
+    }
+
+    Test (String s ) {
+        System.out.println("new2");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Supplier<Test> t1 = Test::new;
+        Function<String, Test> t2 = Test::new;
+        t1.get();
+        t2.apply("test");
+    }
+}
+```
+
+첫번째 t1의 경우 Supplier 함수형 인터페이스로 선언되어 있는데 아시다시피 Supplier는 리턴만 해준다.
+
+즉 생성자 호출 시 매개변수에 아무런 값도 없다는 뜻이다.
+
+하지만 Function을 보도록하자. 우리는 생성자를 호출 할 때 매개변수로 String s 가 선언되어 있는 생성자를 구현하였으며 Function 함수형 인터페이스를 선언을 하였다.
+
+이 때 매개변수로 String s로 받는 생성자가 호출이 되며 이런 방식을 생성자의 메소드참조라고 부른다.
+
+비슷한 예로 배열 선언을 보도록 하자.
+
+```
+public class Main {
+    public static void main(String[] args) {
+        Function<Integer, int[]> f = int[]::new;
+        int[] arr = f.apply(10);
+        System.out.println(arr.length);
+    }
+}
+```
+생성자 메소드 참조를 통하여 값 10을 넣어 주었는데, 예상한대로 arr의 길이는 10이 나올까?
+
+![77](./image/77.png)
+
+예상한대로 10이 나오게 되었다.
 
 
 > 참고
