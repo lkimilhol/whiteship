@@ -138,7 +138,7 @@ class Test extends Thread {
 
 ### 10-2. 쓰레드의 상태
 
-![32](./image/32.png)
+![32](image/32.png)
 
 > 1. 쓰레드가 생성 됨 (create)
 > 2. 대기 (runnable)
@@ -211,7 +211,7 @@ class Test implements Runnable {
 
 2개의 쓰레드는 각자 10번의 증가를 하게 된다. 결과는 어떻게 될까?
 
-![33](./image/33.png)
+![33](image/33.png)
 
 (2가 빠져 있지만 더 혼잡스러운 숫자가 나올 수도 있다)
 
@@ -236,7 +236,7 @@ synchronized란 어떤 역할을 할까?
 ```
 실행 결과를 보도록 하자.
 
-![34](./image/34.png)
+![34](image/34.png)
 
 20까지 모두 순서대로 출력 된 것을 볼 수 있다.
 

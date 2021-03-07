@@ -144,7 +144,7 @@ public interface TestInterface {
 }
 ```
 
-![29](./image/29.png)
+![29](image/29.png)
 
 이후 오버라이딩 하려고 하면 이처럼 컴파일 에러가 발생한다.
 

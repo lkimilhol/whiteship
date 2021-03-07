@@ -74,7 +74,7 @@ public class Main {
 }
 ```
 
-![35](./image/35.png)
+![35](image/35.png)
 
 valueOf() 메소드는 매개변수로 받은 값이 존재 한다면 enum의 상수 스트링을 리턴한다. String에 해당하는 Enum 상수가 없다면 IllegalArgumentException 익셉션을 던진다.
 
@@ -95,7 +95,7 @@ public class Main {
 다음은 Enum 클래스를 알아 보도록 하자. Enum 클래스들에는 다양한 메소드들이 존재 한다.
 
 
-![36](./image/36.png)
+![36](image/36.png)
 
 ### 11-4. EnumSet
 
@@ -148,7 +148,7 @@ public class Main {
 }
 ```
 
-![37](./image/37.png)
+![37](image/37.png)
 
 Set 콜렉션을 생성하고 출력하는 예제이다.
 

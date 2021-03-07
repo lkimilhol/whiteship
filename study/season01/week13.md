@@ -38,7 +38,7 @@ Provides for system input and output through data streams, serialization and the
 
 다음은 test.txt 라는 파일을 생성하고(프로젝트 경로에 만들어 주면 된다) 파일의 내용을 읽는 예제이다.
 
-![40](./image/40.png)
+![40](image/40.png)
 
 문자 스트림 FileReader를 사용한 예제이다.
 
@@ -61,7 +61,7 @@ fileReader.read() > -1 의 의미는 파일의 끝에 도달하지 않았다는 
 
 while 문을 반복하면서 charsRead라는 값을 읽어서 character 형으로 출력을 해주고 있다. charsRead를 character 형을로 변환하지 않는다면 ASCII 값을 10진수로 표현한 값들을 볼 수 있다.
 
-![42](./image/42.png) 
+![42](image/42.png) 
 
 FileReader는 문자 한글자를 만나서 출력하는 내용으로 이해하면 쉽다.
 
@@ -84,7 +84,7 @@ public class Main {
 }
 ```
 
-![43](./image/43.png)
+![43](image/43.png)
 
 인코딩을 형식을 지정하여 스트림을 읽어 올 수 있는데, 해당 방법을 사용하려면 아래와 같이 해야한다. 
 
@@ -121,7 +121,7 @@ public class Main {
 
 결과를 확인 해 보자.
 
-![41](./image/41.png)
+![41](image/41.png)
 
 끝에 이상한 문자가 들어 간 것을 알 수 있다. 아무래도 byte b를 선언 할 때 사이즈를 1024로 주어서가 아닐까?  
 그렇다면 byte b를 선언 할 때 예제로 만들어 놓은 test.txt 파일의 사이즈만큼 넣어 보도록 하자.
@@ -130,7 +130,7 @@ public class Main {
  byte[] b = new byte[fileInputStream.available()];
 ```
 
-![42](./image/42.png)
+![42](image/42.png)
 
 끝에 이상한 문자가 들어가지 않는것을 확인 해 볼 수 있다.
 
@@ -155,7 +155,7 @@ public class Main {
 
 FileWriter를 활용하였다. 한글까지 잘 남겨지는지 테스트 하기 위해 한글도 테스트를 해 보았다.
 
-![46](./image/46.png)
+![46](image/46.png)
 
 한글까지 잘 남겨져 있는 것을 확인 할 수 있다.
 
@@ -176,7 +176,7 @@ public class Main {
 
 그리고 test.txt 파일을 확인 해 보자.
 
-![44](./image/44.png)
+![44](image/44.png)
 
 파일 내용이 모두 제거 되고 write test라는 내용이 들어가 있는 것을 확인 할 수 있다.
 
@@ -188,7 +188,7 @@ FileOutputStream fileOutputStream = new FileOutputStream("test.txt", true)
 
 마지막에 true를 매개변수로 넘겨주고 있는데 true 시 파일이 append 되도록 한 것이다. (FileWriter 또한 마찬가지의 매개변수가 있다)
 
-![45](./image/45.png)
+![45](image/45.png)
 
 <버퍼> 
 
@@ -228,7 +228,7 @@ public class Main {
 }
 ```
 
-![47](./image/47.png)
+![47](image/47.png)
 
 1000000번 파일의 쓰기를 테스트 했을때 BufferedWriter가 월등히 빠른 것을 알 수 있다. output의 연산이 많을 수록 두 방식의 차이는 더욱 크게 날 것이다.
 
@@ -312,7 +312,7 @@ java에서의 InputStream, OutputStream은 바이트 단위 입출력의 최상�
   
     해당 클래스를 사용하기 위해서는 Object의 클래스가 serializable 인터페이스를 구현해야 한다.
 
-    ![48](./image/48.png)
+    ![48](image/48.png)
   
 
 * BufferedInputStream / BufferedOutputStream  
@@ -324,7 +324,7 @@ java에서의 InputStream, OutputStream은 바이트 단위 입출력의 최상�
 * PrintStream
   PrintStream은 데이터를 기반스트림에 다양한 형태로 출력할수있는 메소드를 제공한다. 우리가 알고 있는 System.out 이 PrintStream 의 객체이다.
 
-  ![49](./image/49.png)
+  ![49](image/49.png)
 
     또한 파일의 쓰기도 가능하다.
 
@@ -343,7 +343,7 @@ java에서의 InputStream, OutputStream은 바이트 단위 입출력의 최상�
     }
   ```
 
-    ![50](./image/50.png)
+    ![50](image/50.png)
   
 
 ### 13-3. Byte와 Character 스트림
@@ -380,7 +380,7 @@ java의 표준 스트림은 콘솔창에서 입력을 받고 콘솔창으로 출
 
 시스템 클래스를 확인하여 보자.
 
-![51](./image/51.png)
+![51](image/51.png)
 
 >System.in: 표준 입력용 스트림  
 System.out: 표준 출력용 스트림  
@@ -390,12 +390,12 @@ in, out, err은 static 으로 선언된 정적 멤버 이기 때문에 new 연�
 
 in의 메소드들을 사용할 땐 반드시 예외처리가 있어야 한다.
 
-![53](./image/53.png)
+![53](image/53.png)
 
 
 우리가 사용하는 out.println은 결국 PrintStream 클래스의 메소드를 호출 한 것이다. 확인해보자.
 
-![52](./image/52.png)
+![52](image/52.png)
 
 println 메소드는 모두 오버로딩 되어 있어 각 타입에 맞는 메소드를 호출하게 된다. 결국 내부적으로 print(x)를 통해 출력을 해주고 newLine()을 라인을 넘기는 역할을 해 주고 있는 것이다.
 
@@ -461,8 +461,8 @@ while ((i = br.read()) > -1) {
 ```
 
 
-![54](./image/54.png)
+![54](image/54.png)
 
-![55](./image/55.png)
+![55](image/55.png)
 
 소스 코드를 바뀐 뒤 test.txt 와 test1.txt가 완전 동일 한 것을 볼 수 있다.

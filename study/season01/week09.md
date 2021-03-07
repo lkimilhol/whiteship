@@ -115,7 +115,7 @@ private static void check() {
 
 자바에서는 큰 분류로 Error와 Exception 클래스로 분류가 된다.
 
-![30](./image/30.png)
+![30](image/30.png)
 
 Exception의 경우 클래스로 계층화 되어 있는 것을 확인 할 수 있는데, RuntimeException의 경우 개발자가 실수로 만나는 예외들이 있다.
 
@@ -196,7 +196,7 @@ RE이 아닌 예외이기 때문에 위와 같이 try catch 구문으로 감싸�
 
 그렇다면 RuntimeException을 상속 받게 되면 try catch 문은 필요 없을까?
 
-![31](./image/31.png)
+![31](image/31.png)
 
 위와 같이 컴파일 타임에는 문제가 없다.
 

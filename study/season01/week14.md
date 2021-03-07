@@ -57,7 +57,7 @@ String type 데이터를 set해주었고 Test 클래스에서는 Object type의 
 
 하지만 데이터를 가져온 뒤 더하기 연산을 한 결과를 출력하려고 하면 런타임에 에러가 나게 된다.
 
-![57](./image/57.png)
+![57](image/57.png)
 
 캐스팅에 대한 에러이다. 이처럼 Object type의 데이터를 형 변환 하면서 예측하지 못한 에러를 만날 수 있다.
 
@@ -87,7 +87,7 @@ public class Main {
 }
 ```
 
-![58](./image/58.png)
+![58](image/58.png)
 
 이처럼 t.setObj("1")에서 컴파일 에러를 만날 수 있다.
 
@@ -130,7 +130,7 @@ public class Main {
 
 제네릭을 사용하여 t라는 객체를 컴파일 타임에 인스턴스 사용시 타입을 정하게 된다.
 
-![56](./image/56.png)
+![56](image/56.png)
 
 obj의 값으로 넣어준 1과 Test라는 obj의 타입을 출력하였다.  
 
@@ -193,7 +193,7 @@ public class Main {
 }
 ```
 
-![59](./image/59.png)
+![59](image/59.png)
 
 type를 보면 Integer, Double, String 이 출력 되는 것을 볼 수 있다.
 
@@ -221,7 +221,7 @@ public <T extends Integer> void checkType(T obj) {
 
 <T extends Integer>를 명시하여 제네릭을 Integer로 바운디드 하였다. 즉 Integer로 제한을 한다는 것이다. 메소드를 호출 해 보도록 하자.
 
-![61](./image/61.png)
+![61](image/61.png)
 
 int로 선언한 변수 a는 매개변수로 넣어 줄 수 있지만 double 타입과 String 타입은 컴파일 에러가 나게 된다.
 
@@ -239,7 +239,7 @@ int로 선언한 변수 a는 매개변수로 넣어 줄 수 있지만 double 타
 
 보통 많이 사용되는 과일로 예를들어 제네릭과 와일드카드를 예제를 보도록 하자.
 
-![62](./image/62.png)
+![62](image/62.png)
 
 과일 클래스와 사과 클래스, 그리고 고기 클래스가 있다.
 
@@ -247,7 +247,7 @@ ArrayList로 생성되는 리스트중 제네릭을 사용하여 과일의 자�
 
 그렇다면 super를 사용해 보도록 하자.
 
-![63](./image/63.png)
+![63](image/63.png)
 
 제네릭에는 Apple의 조상 클래스가 올 수 있도록 제한 하였고 Fruit 타입의 리스트를 생성하도록 한 예제이다. 
 
@@ -283,7 +283,7 @@ public class Main {
 
 제네릭 메소드를 사용하여 매개변수를 받았고 간단하게 결과를 출력한다.
 
-![60](./image/60.png)
+![60](image/60.png)
 
 
 ### 14-3. Erasure

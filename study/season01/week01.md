@@ -12,7 +12,7 @@ JVM에는 2가지 기본 기능이 있는데, 자바 프로그램이 어느 기�
 
 ### 1-2. JVM의 구조
 JVM은 Class Loader, Garbage Collector, Execution Engine 3가지로 나뉜다.
-![01](./image/01.png)
+![01](image/01.png)
 
 #### [Class Loader]
 Class Loders는 런타임에 Java 클래스를 JVM에 동적으로 로드하느 역할을 담당한다.
@@ -63,7 +63,7 @@ JIT 컴파일러: 인터프리터의 단점을 보완하기 위해 도입된 방
 
 ### 1-3. 자바가 실행되는 과정
 
-![02](./image/02.png)
+![02](image/02.png)
 
 Java언어를 Java 컴파일러가 가상 기계어 파일인 Java 클래스로 만든다.
 즉 이때 .java가 .class인 바이트코드로 바뀌게 되고 JVM의 Class Loader를 통해 class파일들을 로딩하게 된다.
