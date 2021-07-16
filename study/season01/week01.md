@@ -15,7 +15,8 @@ JVM은 Class Loader, Garbage Collector, Execution Engine 3가지로 나뉜다.
 ![01](image/01.png)
 
 #### [Class Loader]
-Class Loders는 런타임에 Java 클래스를 JVM에 동적으로 로드하는 역할을 담당한다.
+Class Loders는 런타임에 Java 클래스를 JVM에 동적으로 로드하는 역할을 담당한다. 
+즉 컴파일러에서 생성 된 class 파일을 읽어 메모리에 적재한다.
 따라서 JVM은 Class Loader 덕분에 Java 프로그램을 실행하기 위한 기본 파일이나 파일 시스템을 알 필요가 없다.
 Java 클래스는 한 번에 모두 메모리에 로드 되는것이 아닌 애플리케이션에 의해 필요할 때 로딩된다. 또한 클래스가 로딩이 될 때 이미 로딩이 되어있다면 메모리에 캐싱이 되어 있기 때문에 클래스를 반환하게 된다.
 만약 로딩이 되어있지 않다면 parent에게 클래스를 로딩하게 위임을 하게 parent가 로딩을 할 수 없다면 자기 자신이 로딩하게 된다. 
