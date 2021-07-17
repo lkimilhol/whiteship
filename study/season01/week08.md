@@ -196,3 +196,12 @@ public interface TestInterface {
     }
 }
 ```
+
+### 8-8. abstract class와 다른 점
+
+interface에 default 메서드가 생기면서 abstract 클래스와 역할이 중복이 된 다고 생각 할 수 있자만,
+abstract class는 역할의 확장에 주 목적이 있다. 즉 abstract class를 상속받는 클래스 입장에서 메서드를 override 하여 기능을 확장 한다.
+
+반면 interface는 메서드를 강제로 구현 시키는데 목적이 있다.
+
+또한 interface에서는 상수만 사용 가능한 반면 abstract class의 경우에는 접근 제어자를 사용하여 필드의 접근성을 조절 할 수 있다.
